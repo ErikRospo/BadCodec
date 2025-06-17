@@ -8,7 +8,7 @@ from main import encode_audio_to_image, decode_image_to_audio
 DEMO_DIR = "./demo_files"
 os.makedirs(DEMO_DIR, exist_ok=True)
 
-AUDIO_FILE = os.path.join(DEMO_DIR, "Take Five.wav")
+AUDIO_FILE = "Take Five.wav"
 FORMATS = ["png", "webp"]
 
 # JPEG quality and subsampling settings
