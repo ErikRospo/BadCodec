@@ -116,21 +116,21 @@ def decode_image_to_audio(
     # Transpose to shape (channels, samples)
     return audio_reconstructed.T
 
+if __name__=="__main__":
+    # Encoding
+    encoded_image, min_c, max_c, padded_length = encode_audio_to_image(audio_data)
+    encoded_image.save("encoded_log_audio_stereo.png")
 
-# Encoding
-encoded_image, min_c, max_c, padded_length = encode_audio_to_image(audio_data)
-encoded_image.save("encoded_log_audio_stereo.png")
+    loaded_image = Image.open("encoded_log_audio_stereo.png")
+    decoded_audio = decode_image_to_audio(
+        loaded_image, min_c, max_c, padded_length, num_channels
+    )
 
-loaded_image = Image.open("encoded_log_audio_stereo.png")
-decoded_audio = decode_image_to_audio(
-    loaded_image, min_c, max_c, padded_length, num_channels
-)
-
-# Save result
-sf.write(
-    "decoded_log_output_stereo.wav",
-    decoded_audio.T,
-    sample_rate,
-    format="WAV",
-    subtype="FLOAT",
-)
+    # Save result
+    sf.write(
+        "decoded_log_output_stereo.wav",
+        decoded_audio.T,
+        sample_rate,
+        format="WAV",
+        subtype="FLOAT",
+    )
