@@ -1,0 +1,6 @@
+# BadCodec
+
+BadCodec, also known as A Method for Perceptually Warped, Entropy-Efficient Remapping of a Continuous Signal into a Compressible, Visually Structured Format (AMPWEERCSCVSF), is a project that is able to convert audio, such as music, into a picture. If the image format is lossless, this conversion is nearly lossless. JPG, and other similarly lossy image formats rapidly lose quality, and can produce harmfully loud output, so be cautious.
+
+Despite this absolutely dumb method, BadCodec can achieve compression with a magnitude approaching that of FLAC files. 
+For [Take Five](https://music.youtube.com/watch?v=ryA6eHZNnXY), with a raw (WAV) input file size of 59.35 MB, the compressed image is a 3782x3780 PNG, with a file size of 40.74 MB. For comparison, a FLAC file of the same audio is 33.72MB. For as silly of an idea as this is, it does work surprisingly well. While FLAC was roughly able to halve the input size, getting a compression ratio of about 30% smaller is unexpectedly good. 
