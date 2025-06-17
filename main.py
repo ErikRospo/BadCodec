@@ -2,6 +2,7 @@ import numpy as np
 from PIL import Image
 import librosa
 import math
+from typing import Tuple
 import soundfile as sf
 
 # Load stereo audio (shape: 2 x samples)
@@ -56,7 +57,8 @@ def signed_log_decode(compressed: np.ndarray, alpha=ALPHA) -> np.ndarray:
     return audio
 
 
-def encode_audio_to_image(audio_data: np.ndarray) -> (Image.Image, float, float, int):
+
+def encode_audio_to_image(audio_data: np.ndarray) -> Tuple[Image.Image, float, float, int]:
     channels, length = audio_data.shape
     audio_clipped = np.clip(audio_data, -1.0, 1.0)
 
@@ -69,6 +71,9 @@ def encode_audio_to_image(audio_data: np.ndarray) -> (Image.Image, float, float,
     norm_data = (interleaved - min_val) / (max_val - min_val)
 
     dimensions = optimal_dimensions(len(norm_data))
+    if dimensions[0] is None or dimensions[1] is None:
+        raise ValueError("Could not determine optimal image dimensions.")
+    
     target_size = dimensions[0] * dimensions[1]
     pad_len = target_size - len(norm_data)
     if pad_len < 0:
